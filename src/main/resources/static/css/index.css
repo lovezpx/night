@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+header {
+    width: 100%;
+    position: relative;
+}
+
+#head {
+    width: 100%;
+    background: black;
+    height: 30px;
+    line-height: 28px;
+}
+
+#head li {
+    float: left;
+    list-style-type: none;
+    margin-right: 20px;
+    margin-left: 5px;
+    color: white !important;
+}
+
+#head li a {
+    color: white;
+    text-decoration: none;
+}
+
+.active {
+    font-weight: bolder;
+    border-top: 2px solid yellow;
+}
+
+header div {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: white;
+    line-height: 30px;
+
+}
+
+header div span {
+    position: relative;
+    margin-right: 5px;
+}
+
+li {
+    cursor: pointer;
+}
+
+.userPic {
+    position: relative;
+    top: -2px;
+    border-radius: 10px;
+    height: 25px;
+    width: 25px;
+}

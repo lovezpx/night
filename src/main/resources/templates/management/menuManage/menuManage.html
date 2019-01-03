@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>菜单管理</title>
+    <script th:src="@{/plugins/jquery/jquery-1.10.1.js}"></script>
+    <script th:src="@{/plugins/ztree/jquery.ztree.core.min.js}"></script>
+    <script th:src="@{/plugins/ztree/jquery.ztree.exhide.min.js}"></script>
+    <script th:src="@{/plugins/ztree/jquery.ztree.exedit.min.js}"></script>
+    <script th:src="@{/plugins/ztree/treeSearch.js}"></script>
+    <script th:src="@{/js/management/menuManage/menuManage.js}"></script>
+    <link rel="stylesheet" th:href="@{/plugins/ztree/zTreeStyle.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/plugins/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/management/menuManage/menuManage.css}">
+</head>
+<body>
+<div style="clear: both;"></div>
+<div class="treeDiv">
+    <div class="content_wrap">
+        <p><input type="text" id="key" value="" class="empty" /><i class="fa fa-search" aria-hidden="true"></i></p>
+        <div class="left">
+            <ul id="treeMenu" class="ztree"></ul>
+            <div id="model"  class="model">
+                <p><span>节点标题:</span><span><input type="text" name='name'></span></p>
+                <p><span>节点键值:</span><span><input type="text" name="type"></span></p>
+                <p><span>节点链接:</span><span><input type="text" name='url'></span></p>
+                <p><span>节点图标:</span><span><input type="text" name='logo'></span></p>
+                <p><span>展示排序:</span><span><input type="text" name='sort'></span></p>
+                <p><span>打开方式:</span><span>
+                    <select name="target">
+                      <option value ="#">#</option>
+                      <option value ="_self">_self</option>
+                      <option value="_top">_top</option>
+                    </select></span>
+                </p>
+            </div>
+        </div>
+</div>
+</div>
+<div id="previewDiv" class="previewDiv"></div>
+<div class="menumask" id="menumask">
+</div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.treeDiv {
+    float: left;
+    padding-top: 16px;
+    padding-left: 10px;
+    width: 15vw;
+    border: 1px solid orange;
+    box-sizing: border-box;
+    height: 96vh;
+}
+
+.previewDiv {
+    padding-top: 16px;
+    float: right;
+    width: 84vw;
+    border: 1px solid orange;
+    box-sizing: border-box;
+    height: 96vh;
+}
+
+.fa-search {
+    position: relative;
+    left: -195px;
+    color: #26A88E;
+    border-width: thin;
+
+}
+
+.treeDiv div.content_wrap {
+    width: 14vw;
+    overflow-x: hidden;
+}
+
+.treeDiv .ztree {
+    height: 90vh;
+    overflow-y: auto;
+    width: 15vw;
+}
+
+.treeDiv .empty {
+    width: 195px;
+    height: 21px;
+    text-indent: 20px;
+    margin-bottom: 5px;
+
+}
+
+.model p span:first-child {
+    width: 70px;
+    display: inline-block;
+}
+
+.model p {
+    margin-top: 10px;
+}
+
+.model p input {
+    border-radius: 2px;
+    border: 1px solid #bbb;
+}
+
+.model {
+    display: none;
+    padding: 10px;
+}
+
+.layui-layer-title {
+    cursor: move;
+    background: green;
+    color: white;
+}
+
+.layui-layer-btn .layui-layer-btn0 {
+    border-color: green;
+    background-color: green;
+    color: #fff;
+}
+
+.layui-layer-ico {
+    background: none;
+}
+
+.fa-times {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
+.menumask {
+    width: 85%;
+    height: 96vh;
+    right: 0;
+    position: absolute;
+    z-index: 100;
+}

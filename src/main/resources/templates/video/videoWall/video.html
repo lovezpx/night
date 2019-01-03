@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>影片内容</title>
+    <script th:src="@{/plugins/jquery/jquery-1.10.1.js}"></script>
+    <script th:src="@{/js/video/videoWall/video.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/video/videoWall/video.css}">
+</head>
+<body>
+<div>
+    <div>
+        <p id="breadcrumb"></p>
+    </div>
+    <div id="videoTabContent" class="videoTabContent">
+        <div>
+            <span data-type="detail" class="tab">影片详情</span>
+            <span data-type="player" class="tab">在线观看</span>
+            <p class="videoLine"></p>
+        </div>
+        <div id="videoDetail" class="videoDetail">
+
+        </div>
+        <div id="videoPlayContent" style="display: none">
+            <div id="videoPlayer" class="videoDetail">
+
+            </div>
+            <div id="playerTab" class="playerTab"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

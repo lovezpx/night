@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>视频上传</title>
+    <script th:src="@{/plugins/easyui/jquery.easyui.min.js}"></script>
+    <script th:src="@{/js/management/video/videoUpload/videoUpload.js}"></script>
+    <script th:src="@{/plugins/jquery/jquery-tag.js}"></script>
+    <link rel="stylesheet" th:href="@{/plugins/easyui/themes/default/easyui.css}">
+    <link rel="stylesheet" th:href="@{/plugins/easyui/themes/icon.css}">
+    <link rel="stylesheet" th:href="@{/plugins/jquery/css/jquery-tag.css}">
+    <link rel="stylesheet" th:href="@{/css/management/video/videoUpload/videoUpload.css}">
+</head>
+<body>
+<div style="clear:both"></div>
+<div class="submitLeft">
+    <div class="layui-form-item">
+        <label class="layui-form-label">视频集名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="vgName" lay-verify="title" autocomplete="off" placeholder="请输入视频集名称"
+                   class="layui-input" style="width:200px">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">视频集类别</label>
+        <div class="layui-input-block" style="width:200px">
+            <select id="videoType" name="vgType">
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">作者</label>
+        <div class="layui-input-block">
+            <input type="text" name="author" lay-verify="title" autocomplete="off" placeholder="请输入作者"
+                   class="layui-input" style="width:200px">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">番号</label>
+        <div class="layui-input-block">
+            <input type="text" name="numCode" lay-verify="title" autocomplete="off" placeholder="请输入番号"
+                   class="layui-input" style="width:200px">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <br>
+        <label class="layui-form-label" style="font-size: 20px;">标签选择</label>
+    </div>
+    <div class="layui-form-item">
+        <div class="plus-tag tagbtn clearfix" id="myTags"></div>
+        <div class="plus-tag-add">
+            <form id="plus-tag-add" class="tag-login">
+                <ul class="Form FancyForm">
+                    <li>
+                        <input id="" name="" type="text" class="stext" maxlength="20"/>
+                        <label>输入标签</label>
+                        <span class="fff"></span>
+                    </li>
+                    <li>
+                        <button type="button" class="Button RedButton Button18" style="font-size:22px;">添加标签</button>
+                        <a href="javascript:void(0);">展开推荐标签</a>
+                    </li>
+                </ul>
+            </form>
+        </div><!--plus-tag-add end-->
+        <div id="mycard-plus" style="display:none;">
+            <div class="default-tag tagbtn">
+                <div id="recommend-tag" class="clearfix">
+
+                </div>
+            </div><!--mycard-plus end-->
+        </div>
+    </div>
+
+    <div class="layui-form-item" style="margin-top: 100px;">
+        <div class="layui-input-block">
+            <button id="uploadSubmit" class="layui-btn btn" lay-submit="" lay-filter="">立即提交</button>
+        </div>
+    </div>
+</div>
+
+<div class="submitRight">
+    <div class="coverImg">
+        <p>
+            <button type="button" class="layui-btn" id="coverPicture" style="vertical-align:top">选择封面</button>
+            <input id="picSrc" class="layui-input picSrc" type="text" name="name" lay-verify="title" autocomplete="off"
+                   placeholder="图片路径">
+        </p>
+        <img id="coverPreview" src="" alt="">
+    </div>
+    <br>
+    <div>
+        <button type="button" class="layui-btn" id="film"><i class="layui-icon"></i>上传视频</button>
+        <br><br>
+        <div>
+            <table id="dg" class="easyui-datagrid" style="height:300px"></table>
+        </div>
+    </div>
+</div>
+<div class="mask" id="mask">
+    <div class="layui-progress layui-progress-big cusprogress" lay-showPercent="yes" lay-filter="progressBar">
+        <div class="layui-progress-bar layui-bg-red" lay-percent="0%"></div>
+    </div>
+</div>
+</body>
+</html>

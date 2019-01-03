@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <title>夜色网</title>
+    <script th:src="@{/plugins/jquery/jquery-1.10.1.js}"></script>
+    <script th:src="@{/js/index.js}"></script>
+    <script th:src="@{/js/common/util.js}"></script>
+    <script th:src="@{/js/common/ConstantVarSet.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/plugins/layer/skin/default/layer.css}">
+    <link rel="stylesheet" th:href="@{/plugins/layui/css/layui.css}">
+    <script th:src="@{/plugins/layer/layer.js}" merge="true"></script>
+    <script th:src="@{/plugins/layui/layui.js}" merge="true"></script>
+</head>
+<body>
+<header>
+    <ul id="head"></ul>
+    <div>
+        <span sec:authorize="isAnonymous()">
+            <span>ES访客</span>
+            <span><a th:href="@{/login}">登录</a></span>
+            <span><a th:href="@{/register}">注册</a></span>
+        </span>
+        <span sec:authorize="isAuthenticated()">
+            <img class="userPic" th:src="@{/picture/pictureServer/findPicSrcByPrimaryKey(id=pic_iya4318v93y33losbbxoxy8r8zr6)}"/>
+            <span sec:authentication="principal.nickname"></span>
+        </span>
+    </div>
+    <p style="clear: both"></p>
+</header>
+<div id="content">
+</div>
+</body>
+</html>

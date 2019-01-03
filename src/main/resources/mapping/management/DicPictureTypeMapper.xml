@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.index.management.mapper.DicPictureTypeMapper">
+    <resultMap id="BaseResultMap" type="com.index.management.model.DicPictureType">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="isUsing" jdbcType="INTEGER" property="isusing"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.index.management.model.DicPictureType">
+        <result column="remark" jdbcType="LONGVARBINARY" property="remark"/>
+    </resultMap>
+    <sql id="Base_Column_List">id, type, name, isUsing, sort</sql>
+    <sql id="Blob_Column_List">remark</sql>
+    <select id="selectByTypeKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from dic_picturetype
+        where type = #{type,jdbcType=VARCHAR}
+    </select>
+    <select id="selectAll" resultMap="ResultMapWithBLOBs">select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from dic_picturetype
+        order by sort
+    </select>
+    <select id="selectByName" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from dic_picturetype
+        where name like "%"#{name,jdbcType=VARCHAR}"%"
+        order by sort
+    </select>
+    <select id="selectByIsUsing" parameterType="Integer" resultMap="ResultMapWithBLOBs">select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from dic_picturetype
+        where isusing = #{isusing,jdbcType=INTEGER}
+        order by sort
+    </select>
+
+    <update id="deleteByPrimaryKey" parameterType="java.lang.String">
+     update dic_picturetype set isUsing = 0
+     where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <insert id="insert" parameterType="com.index.management.model.DicPictureType">
+    insert into dic_picturetype (id, type, name, 
+      isUsing, sort, remark)
+    values (#{id,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{isusing,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{remark,jdbcType=LONGVARBINARY})
+  </insert>
+    <insert id="insertSelective" parameterType="com.index.management.model.DicPictureType">
+        insert into dic_picturetype
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="type != null">type,</if>
+            <if test="name != null">name,</if>
+            <if test="isusing != null">isusing,</if>
+            <if test="sort != null">sort,</if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+            <if test="type != null">#{type,jdbcType=VARCHAR},</if>
+            <if test="name != null">#{name,jdbcType=VARCHAR},</if>
+            <if test="isusing != null">#{isusing,jdbcType=INTEGER},</if>
+            <if test="sort != null">#{sort,jdbcType=INTEGER},</if>
+            <if test="remark != null">#{remark,jdbcType=LONGVARBINARY},</if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.index.management.model.DicPictureType">
+        update dic_picturetype
+        <set>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="isusing != null">isUsing = #{isusing,jdbcType=INTEGER},</if>
+            <if test="sort != null">sort = #{sort,jdbcType=INTEGER},</if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=LONGVARBINARY},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.index.management.model.DicPictureType">
+    update dic_picturetype
+    set type = #{type,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      isUsing = #{isusing,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=LONGVARBINARY}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

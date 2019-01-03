@@ -1,0 +1,53 @@
+server:
+    port: 8080
+
+spring:
+    datasource:
+        name: night
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://10.10.201.154:3306/night?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=UTC
+        username: night
+        password: night
+    thymeleaf:
+        prefix: classpath:/templates/
+        check-template-location: true
+        suffix: .html
+        encoding: UTF-8
+        mode: LEGACYHTML5
+        cache: false
+    aop:
+        auto: true
+        proxy-target-class: true
+    servlet:
+        multipart:
+        max-file-size: 10Mb
+        max-request-size: 100Mb
+    devtools:
+        restart:
+            enabled: true #热部署生效
+
+## 该配置节点为独立的节点
+mybatis:
+    mapper-locations: classpath:mapping/**/*.xml
+    type-aliases-package: com.index
+
+logging:
+    config: classpath:logback-spring.xml
+    level:
+        org:
+            mybatis: debug
+            springframework:
+               web: debug
+
+swagger:
+    show: true
+
+configfile: config.properties
+
+
+localfile:
+    picturePath: file://10.10.28.160/視頻/夜色网/
+    videoPath: file://10.10.28.160/視頻/
+    uploadPicturePath: //10.10.28.160/視頻/夜色网/
+    uploadVideoPath: //10.10.28.160/視頻/
+    ffmpegPath: static\plugins\ffmpeg\bin\ffmpeg.exe

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.index.video.mapper.VideoTipMapper">
+    <resultMap id="BaseResultMap" type="com.index.video.model.VideoTip">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="vgid" jdbcType="VARCHAR" property="vgid"/>
+        <result column="tipName" jdbcType="VARCHAR" property="tipname"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createtime"/>
+        <result column="createBy" jdbcType="VARCHAR" property="createby"/>
+    </resultMap>
+    <sql id="Base_Column_List">id, vgid, tipName, createTime, createBy</sql>
+    <delete id="deleteByPrimaryKey"
+            parameterType="java.lang.String">delete from videotip where id = #{id,jdbcType=VARCHAR}</delete>
+    <insert id="insert"
+            parameterType="com.index.video.model.VideoTip">
+        insert into videotip (id, vgid, tipName, createTime, createBy )
+        values (#{id,jdbcType=VARCHAR}, #{vgid,jdbcType=VARCHAR}, #{tipname,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{createby,jdbcType=VARCHAR} )</insert>
+    <insert id="insertSelective" parameterType="com.index.video.model.VideoTip">insert into videotip
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="vgid != null">vgid,</if>
+            <if test="tipname != null">tipName,</if>
+            <if test="createtime != null">createTime,</if>
+            <if test="createby != null">createBy,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+            <if test="vgid != null">#{vgid,jdbcType=VARCHAR},</if>
+            <if test="tipname != null">#{tipname,jdbcType=VARCHAR},</if>
+            <if test="createtime != null">#{createtime,jdbcType=TIMESTAMP},</if>
+            <if test="createby != null">#{createby,jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.index.video.model.VideoTip">update videotip
+        <set>
+            <if test="vgid != null">vgid = #{vgid,jdbcType=VARCHAR},</if>
+            <if test="tipname != null">tipName = #{tipname,jdbcType=VARCHAR},</if>
+            <if test="createtime != null">createTime = #{createtime,jdbcType=TIMESTAMP},</if>
+            <if test="createby != null">createBy = #{createby,jdbcType=VARCHAR},</if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from videotip where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT
+            tipName
+        FROM
+            ( SELECT DISTINCT ( tipName ), count( tipName ) AS num FROM videotip vt GROUP BY tipName ) t
+        ORDER BY
+            t.num DESC
+        LIMIT 0,40
+    </select>
+    <select id="selectByVgid" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        distinct(tipName)
+        from videotip  where vgid = #{vgid,jdbcType=VARCHAR}
+    </select>
+</mapper>

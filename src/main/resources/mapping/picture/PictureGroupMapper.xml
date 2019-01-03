@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.index.picture.mapper.PictureGroupMapper">
+  <resultMap id="BaseResultMap" type="com.index.picture.pojo.PictureGroupBean">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="numCode" jdbcType="VARCHAR" property="numcode" />
+    <result column="coverId" jdbcType="VARCHAR" property="coverid" />
+    <result column="uploadTime" jdbcType="TIMESTAMP" property="uploadtime" />
+    <result column="uploadBy" jdbcType="VARCHAR" property="uploadby" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="updateBy" jdbcType="VARCHAR" property="updateby" />
+    <association property="coverSrc" javaType="string">
+      <result property="coverSrc" column="src"/>
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    pg.id, pg.name, pg.type, pg.author, pg.numCode, pg.coverId, p.src, pg.uploadTime, pg.uploadBy, pg.updateTime, pg.updateBy
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from picturegroup pg
+    left join picture p on pg.coverId = p.id
+    where pg.id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from picturegroup pg
+    left join picture p on pg.coverId = p.id
+    where pg.name = #{name,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByType" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from picturegroup pg
+    left join picture p on pg.coverId = p.id
+    where pg.type = #{type,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByAuthor" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from picturegroup pg
+    left join picture p on pg.coverId = p.id
+    where pg.author = #{author,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByNumCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from picturegroup pg
+    left join picture p on pg.coverId = p.id
+    where pg.numCode = #{numcode,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from picturegroup
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.index.picture.model.PictureGroup">
+    insert into picturegroup (id, name, type, 
+      author, numCode, coverId, 
+      uploadTime, uploadBy, updateTime, 
+      updateBy)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{author,jdbcType=VARCHAR}, #{numcode,jdbcType=VARCHAR}, #{coverid,jdbcType=VARCHAR}, 
+      #{uploadtime,jdbcType=TIMESTAMP}, #{uploadby,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{updateby,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.index.picture.model.PictureGroup">
+    insert into picturegroup
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="author != null">
+        author,
+      </if>
+      <if test="numcode != null">
+        numCode,
+      </if>
+      <if test="coverid != null">
+        coverId,
+      </if>
+      <if test="uploadtime != null">
+        uploadTime,
+      </if>
+      <if test="uploadby != null">
+        uploadBy,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+      <if test="updateby != null">
+        updateBy,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="numcode != null">
+        #{numcode,jdbcType=VARCHAR},
+      </if>
+      <if test="coverid != null">
+        #{coverid,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime != null">
+        #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadby != null">
+        #{uploadby,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateby != null">
+        #{updateby,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.index.picture.model.PictureGroup">
+    update picturegroup
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="numcode != null">
+        numCode = #{numcode,jdbcType=VARCHAR},
+      </if>
+      <if test="coverid != null">
+        coverId = #{coverid,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime != null">
+        uploadTime = #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadby != null">
+        uploadBy = #{uploadby,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateby != null">
+        updateBy = #{updateby,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.index.picture.model.PictureGroup">
+    update picturegroup
+    set name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      numCode = #{numcode,jdbcType=VARCHAR},
+      coverId = #{coverid,jdbcType=VARCHAR},
+      uploadTime = #{uploadtime,jdbcType=TIMESTAMP},
+      uploadBy = #{uploadby,jdbcType=VARCHAR},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      updateBy = #{updateby,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

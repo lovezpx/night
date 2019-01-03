@@ -1,0 +1,78 @@
+.submitLeft {
+    float: left;
+    width: 40%;
+    padding-top: 20px;
+    padding-left: 10%;
+    box-sizing: border-box;
+}
+
+.submitLeft .label {
+    width: 50%;
+}
+
+.submitLeft .coverImg {
+    position: relative;
+    left: 30px;
+}
+
+.submitLeft .customizeLabel {
+    width: 92px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    font-size: 12px;
+    background: #009688;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    position: relative;
+    top: 2px;
+}
+
+.submitRight .coverImg img {
+    width: 70vh;
+    height: 43vh;
+    background: #ccc;
+    margin-top: 10px;
+}
+
+.submitRight {
+    float: left;
+    width: 60%;
+    padding-top: 20px;
+    box-sizing: border-box;
+}
+
+.layui-form-checkbox span {
+    width: 42px;
+}
+
+.mask {
+    background: #0000007a;
+    width: 60%;
+    height: 100vh;
+    position: fixed;
+    z-index: 10;
+    right: 0;
+    top: 0;
+    display: none;
+}
+
+.cusprogress {
+    position: relative;
+    top: 40%;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.picSrc {
+    width: 54.4%;
+    margin-left: auto;
+    float: left;
+}
+
+select {
+    display: block !important;
+    width: 200px;
+    min-height: 36px;
+}

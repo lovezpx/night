@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+header {
+    width: 100%;
+    position: relative;
+    height: 0vh;
+    box-sizing: border-box;
+
+}
+
+#head {
+    width: 100%;
+    background: black;
+    height: 30px;
+    line-height: 30px;
+}
+
+#head li {
+    float: left;
+    list-style-type: none;
+    margin-right: 20px;
+    margin-left: 5px;
+    color: white !important;
+    cursor: pointer;
+}
+
+.active {
+    font-weight: bolder;
+    border-top: 2px solid yellow;
+}
+
+div#lunbo {
+    width: 100%;
+    height: 40px;
+    background: #F3F7FC;
+}

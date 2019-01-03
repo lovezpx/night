@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.index.video.mapper.VideoTrailerMapper">
+  <resultMap id="BaseResultMap" type="com.index.video.pojo.VideoTrailerBean">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="vgid" jdbcType="VARCHAR" property="vgid" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="numCode" jdbcType="VARCHAR" property="numcode" />
+    <result column="coverId" jdbcType="VARCHAR" property="coverid" />
+    <result column="uploadTime" jdbcType="TIMESTAMP" property="uploadtime" />
+    <result column="uploadBy" jdbcType="VARCHAR" property="uploadby" />
+    <association property="typeName" javaType="string">
+      <result property="typeName" column="dvt.name"/>
+    </association>
+    <association property="coverSrc" javaType="string">
+      <result property="coverSrc" column="p.src"/>
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    vt.id, vt.name, vt.vgid, vt.type, dvt.name, vt.author, vt.numCode, vt.coverId, p.src, vt.uploadTime, vt.uploadBy
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from videotrailer vt
+    left join picture p on vt.coverId = p.id
+    left join dic_videotype dvt on vt.type = dvt.type
+    where vt.id = #{id,jdbcType=VARCHAR}
+    order by vt.uploadTime
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from videotrailer vt
+    left join picture p on vt.coverId = p.id
+    left join dic_videotype dvt on vt.type = dvt.type
+    order by vt.uploadTime
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from videotrailer
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteAll">
+    delete from videotrailer
+  </delete>
+  <insert id="insert" parameterType="com.index.video.model.VideoTrailer">
+    insert into videotrailer (id, name, vgid, 
+      type, author, numCode, 
+      coverId, uploadTime, uploadBy
+      )
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{vgid,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{numcode,jdbcType=VARCHAR}, 
+      #{coverid,jdbcType=VARCHAR}, #{uploadtime,jdbcType=TIMESTAMP}, #{uploadby,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.index.video.model.VideoTrailer">
+    insert into videotrailer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="vgid != null">
+        vgid,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="author != null">
+        author,
+      </if>
+      <if test="numcode != null">
+        numCode,
+      </if>
+      <if test="coverid != null">
+        coverId,
+      </if>
+      <if test="uploadtime != null">
+        uploadTime,
+      </if>
+      <if test="uploadby != null">
+        uploadBy,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="vgid != null">
+        #{vgid,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="numcode != null">
+        #{numcode,jdbcType=VARCHAR},
+      </if>
+      <if test="coverid != null">
+        #{coverid,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime != null">
+        #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadby != null">
+        #{uploadby,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.index.video.model.VideoTrailer">
+    update videotrailer
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="vgid != null">
+        vgid = #{vgid,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="numcode != null">
+        numCode = #{numcode,jdbcType=VARCHAR},
+      </if>
+      <if test="coverid != null">
+        coverId = #{coverid,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime != null">
+        uploadTime = #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadby != null">
+        uploadBy = #{uploadby,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.index.video.model.VideoTrailer">
+    update videotrailer
+    set name = #{name,jdbcType=VARCHAR},
+      vgid = #{vgid,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      numCode = #{numcode,jdbcType=VARCHAR},
+      coverId = #{coverid,jdbcType=VARCHAR},
+      uploadTime = #{uploadtime,jdbcType=TIMESTAMP},
+      uploadBy = #{uploadby,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <resultMap id="ForVideoTrailerResultMap" type="com.index.video.pojo.VideoTrailerBean">
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="numCode" jdbcType="VARCHAR" property="numcode" />
+    <result column="coverId" jdbcType="VARCHAR" property="coverid" />
+    <result column="uploadTime" jdbcType="TIMESTAMP" property="uploadtime" />
+    <result column="uploadBy" jdbcType="VARCHAR" property="uploadby" />
+    <association property="typeName" javaType="string">
+      <result property="typeName" column="dvt.name"/>
+    </association>
+    <association property="coverSrc" javaType="string">
+      <result property="coverSrc" column="p.src"/>
+    </association>
+    <association property="vgid" javaType="string">
+      <result property="vgid" column="vg.id"/>
+    </association>
+  </resultMap>
+  <select id="selectVideoGroupForTrailerByRange" parameterType="java.lang.Integer" resultMap="ForVideoTrailerResultMap">
+    select
+      DISTINCT(vg.id), vg.name, vg.type, dvt.name, vg.author, vg.numCode, vg.coverId, p.src, vg.uploadTime, vg.uploadBy
+    from videogroup vg
+    LEFT JOIN picture p ON vg.coverId = p.id
+    left join dic_videotype dvt on vg.type = dvt.type
+    where vg.id not in (select vt.vgid from videotrailer vt)
+    order by vg.uploadTime desc limit ${start}, ${end}
+  </select>
+</mapper>

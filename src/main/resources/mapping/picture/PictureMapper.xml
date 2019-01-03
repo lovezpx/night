@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.index.picture.mapper.PictureMapper">
+  <resultMap id="BaseResultMap" type="com.index.picture.model.Picture">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="pgid" jdbcType="VARCHAR" property="pgid" />
+    <result column="uploadTime" jdbcType="TIMESTAMP" property="uploadtime" />
+    <result column="uploadBy" jdbcType="VARCHAR" property="uploadby" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="updateBy" jdbcType="VARCHAR" property="updateby" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.index.picture.model.Picture">
+    <result column="src" jdbcType="LONGVARCHAR" property="src" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, pgid, uploadTime, uploadBy, updateTime, updateBy
+  </sql>
+  <sql id="Blob_Column_List">
+    src
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from picture
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="findPicSrcByPrimaryKey" parameterType="java.lang.String" resultType="java.lang.String">
+    select src
+    from picture
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from picture
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.index.picture.model.Picture">
+    insert into picture (id, pgid, uploadTime, 
+      uploadBy, updateTime, updateBy, 
+      src)
+    values (#{id,jdbcType=VARCHAR}, #{pgid,jdbcType=VARCHAR}, #{uploadtime,jdbcType=TIMESTAMP}, 
+      #{uploadby,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, #{updateby,jdbcType=VARCHAR}, 
+      #{src,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.index.picture.model.Picture">
+    insert into picture
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pgid != null">
+        pgid,
+      </if>
+      <if test="uploadtime != null">
+        uploadTime,
+      </if>
+      <if test="uploadby != null">
+        uploadBy,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+      <if test="updateby != null">
+        updateBy,
+      </if>
+      <if test="src != null">
+        src,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="pgid != null">
+        #{pgid,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime != null">
+        #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadby != null">
+        #{uploadby,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateby != null">
+        #{updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="src != null">
+        #{src,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.index.picture.model.Picture">
+    update picture
+    <set>
+      <if test="pgid != null">
+        pgid = #{pgid,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime != null">
+        uploadTime = #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadby != null">
+        uploadBy = #{uploadby,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateby != null">
+        updateBy = #{updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="src != null">
+        src = #{src,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.index.picture.model.Picture">
+    update picture
+    set pgid = #{pgid,jdbcType=VARCHAR},
+      uploadTime = #{uploadtime,jdbcType=TIMESTAMP},
+      uploadBy = #{uploadby,jdbcType=VARCHAR},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      updateBy = #{updateby,jdbcType=VARCHAR},
+      src = #{src,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.index.picture.model.Picture">
+    update picture
+    set pgid = #{pgid,jdbcType=VARCHAR},
+      uploadTime = #{uploadtime,jdbcType=TIMESTAMP},
+      uploadBy = #{uploadby,jdbcType=VARCHAR},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      updateBy = #{updateby,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

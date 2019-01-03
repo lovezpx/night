@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>视频类型字典表</title>
+	<script th:src="@{/plugins/jquery/jquery-1.10.1.js}"></script>
+	<script th:src="@{/plugins/easyui/jquery.easyui.min.js}"></script>
+	<script th:src="@{/js/management/dicManage/dic_videotype.js}"></script>
+	<link rel="stylesheet" th:href="@{/plugins/easyui/themes/default/easyui.css}">
+	<link rel="stylesheet" th:href="@{/plugins/easyui/themes/icon.css}">
+	<link rel="stylesheet" th:href="@{/css/management/dicManage/content.css}">
+</head>
+<body>
+	   <table id="dg" class="easyui-datagrid"></table>
+	   <div id="tb" style="height:auto">
+	        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="append()">添加</a>
+	        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="removeit()">删除</a>
+	        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="accept()">保存</a>
+	        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true" onclick="reject()">撤销</a>
+      </div>
+</body>
+</html>

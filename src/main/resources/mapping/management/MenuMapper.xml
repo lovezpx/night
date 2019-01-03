@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.index.management.mapper.MenuMapper">
+    <resultMap id="BaseResultMap" type="com.index.management.model.Menu">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="logo" jdbcType="VARCHAR" property="logo"/>
+        <result column="target" jdbcType="VARCHAR" property="target"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="parentId" jdbcType="VARCHAR" property="parentId"/>
+        <collection column="id" select="getChildrenMenu" property="children" ofType="com.index.management.model.Menu">
+        </collection>
+    </resultMap>
+    <sql id="Base_Column_List">id, name, type, url, logo, target, sort, parentId</sql>
+    <select id="selectByParentId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from menu
+        where parentId = #{parentId,jdbcType=VARCHAR}
+        order by sort
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from menu
+        order by sort
+    </select>
+    <select id="getChildrenMenu" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from menu
+        where parentId = #{id,jdbcType=VARCHAR}
+        order by sort
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from menu
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insertSelective" parameterType="com.index.management.model.Menu">
+        insert into menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null">name,</if>
+            <if test="type != null">type,</if>
+            <if test="url != null">url,</if>
+            <if test="logo != null">logo,</if>
+            <if test="target != null">target,</if>
+            <if test="sort != null">sort,</if>
+            <if test="parentid != null">parentId,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+            <if test="name != null">#{name,jdbcType=VARCHAR},</if>
+            <if test="type != null">#{type,jdbcType=VARCHAR},</if>
+            <if test="url != null">#{url,jdbcType=VARCHAR},</if>
+            <if test="logo != null">#{logo,jdbcType=VARCHAR},</if>
+            <if test="target != null">#{target,jdbcType=VARCHAR},</if>
+            <if test="sort != null">#{sort,jdbcType=INTEGER},</if>
+            <if test="parentid != null">#{parentid,jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.index.management.model.Menu">
+        update menu
+        <set>
+            <if test="name != null">name = #{name,jdbcType=VARCHAR},</if>
+            <if test="type != null">type = #{type,jdbcType=VARCHAR},</if>
+            <if test="url != null">url = #{url,jdbcType=VARCHAR},</if>
+            <if test="logo != null">logo = #{logo,jdbcType=VARCHAR},</if>
+            <if test="target != null">target = #{target,jdbcType=VARCHAR},</if>
+            <if test="sort != null">sort = #{sort,jdbcType=INTEGER},</if>
+            <if test="parentid != null">parentId = #{parentid,jdbcType=VARCHAR},</if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

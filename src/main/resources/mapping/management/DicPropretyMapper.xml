@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.index.management.mapper.DicPropretyMapper">
+    <resultMap id="BaseResultMap" type="com.index.management.model.DicProprety">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="proprety" jdbcType="VARCHAR" property="proprety"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="isUsing" jdbcType="INTEGER" property="isusing"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.index.management.model.DicProprety">
+        <result column="remark" jdbcType="LONGVARCHAR" property="remark"/>
+    </resultMap>
+    <sql id="Base_Column_List">id, proprety, name, isUsing</sql>
+    <sql id="Blob_Column_List">remark</sql>
+    <select id="selectByPropretyKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from dic_proprety where proprety = #{proprety,jdbcType=VARCHAR}
+    </select>
+    <select id="selectAll" resultMap="ResultMapWithBLOBs">select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from dic_proprety
+        where isusing = 1
+    </select>
+    <select id="selectByName" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from dic_proprety
+        where name like "%"#{name,jdbcType=VARCHAR}"%" and isusing = 1
+    </select>
+    <select id="selectByIsUsing" parameterType="Integer" resultMap="ResultMapWithBLOBs">select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from dic_proprety
+        where isusing = #{isusing,jdbcType=INTEGER}
+    </select>
+
+    <update id="deleteByPrimaryKey" parameterType="java.lang.String">
+        update dic_proprety set isUsing = 0
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <insert id="insert"
+            parameterType="com.index.management.model.DicProprety">insert into dic_proprety (id, proprety, name, isUsing, remark) values (#{id,jdbcType=VARCHAR}, #{proprety,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 1, #{remark,jdbcType=LONGVARCHAR})</insert>
+    <insert id="insertSelective" parameterType="com.index.management.model.DicProprety">insert into dic_proprety
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="proprety != null">proprety,</if>
+            <if test="name != null">name,</if>
+            isUsing,
+            <if test="remark != null">remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+            <if test="proprety != null">#{proprety,jdbcType=VARCHAR},</if>
+            <if test="name != null">#{name,jdbcType=VARCHAR},</if>
+            1,
+            <if test="remark != null">#{remark,jdbcType=LONGVARCHAR},</if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.index.management.model.DicProprety">update dic_proprety
+        <set>
+            <if test="proprety != null">proprety = #{proprety,jdbcType=VARCHAR},</if>
+            <if test="name != null">name = #{name,jdbcType=VARCHAR},</if>
+            <if test="remark != null">remark = #{remark,jdbcType=LONGVARCHAR},</if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs"
+            parameterType="com.index.management.model.DicProprety">update dic_proprety set proprety = #{proprety,jdbcType=VARCHAR}, name = #{name,jdbcType=VARCHAR}, remark = #{remark,jdbcType=LONGVARCHAR} where id = #{id,jdbcType=VARCHAR}</update>
+</mapper>
