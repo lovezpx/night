@@ -1,8 +1,15 @@
-$(function() {
+$(function () {
     initTopMenu();
+    initUserInfo();
 });
 
-function initTopMenu(){
+function initUserInfo() {
+    $("#user-name-span").on('click', function () {
+        // 跳转用户信息页
+    });
+}
+
+function initTopMenu() {
     $.ajax({
         url: "/night/menu/selectByParentId",
         data: {

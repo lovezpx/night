@@ -5,6 +5,7 @@ import com.index.picture.mapper.PictureGroupMapper;
 import com.index.picture.mapper.PictureMapper;
 import com.index.picture.model.Picture;
 import com.index.picture.pojo.PictureGroupBean;
+import com.index.security.pojo.SecurityUser;
 import com.index.utils.UUID;
 import com.index.video.mapper.VideoGroupMapper;
 import com.index.video.mapper.VideoMapper;
@@ -15,6 +16,7 @@ import com.index.video.model.VideoTip;
 import com.index.video.pojo.VideoUploadBean;
 import com.index.video.service.VideoUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,6 +48,7 @@ public class VideoUploadServiceImpl implements VideoUploadService {
     @Transactional(rollbackFor = Exception.class, timeout = 36000)
     public ResultMap<String> upload(VideoUploadBean videoGroupBean) {
         ResultMap<String> result = new ResultMap<String>();
+        SecurityUser securityUser = (SecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         try {
             // 导入视频集封面
             Picture picture = videoGroupBean.getPicture();
@@ -56,9 +59,9 @@ public class VideoUploadServiceImpl implements VideoUploadService {
             picture.setPgid(pictureGroup.getId());
             Date curDate = new Date();
             picture.setUpdatetime(curDate);
-            picture.setUpdateby(SUPER_ADMIN_USER_ID);
+            picture.setUpdateby(securityUser.getId());
             picture.setUploadtime(curDate);
-            picture.setUploadby(SUPER_ADMIN_USER_ID);
+            picture.setUploadby(securityUser.getId());
 
             pictureMapper.insertSelective(picture);
 
@@ -69,9 +72,9 @@ public class VideoUploadServiceImpl implements VideoUploadService {
             videoGroup.setId(vgid);
             videoGroup.setCoverid(picid);
 
-            videoGroup.setUploadby(SUPER_ADMIN_USER_ID);
+            videoGroup.setUploadby(securityUser.getId());
             videoGroup.setUploadtime(curDate);
-            videoGroup.setUpdateby(SUPER_ADMIN_USER_ID);
+            videoGroup.setUpdateby(securityUser.getId());
             videoGroup.setUpdatetime(curDate);
             videoGroupMapper.insertSelective(videoGroup);
 

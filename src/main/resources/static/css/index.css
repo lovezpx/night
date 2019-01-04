@@ -63,3 +63,7 @@ li {
     height: 25px;
     width: 25px;
 }
+
+.user-name-span {
+    cursor: pointer;
+}

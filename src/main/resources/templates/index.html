@@ -26,8 +26,7 @@
             <span><a th:href="@{/register}">注册</a></span>
         </span>
         <span sec:authorize="isAuthenticated()">
-            <img class="userPic" th:src="@{/picture/pictureServer/findPicSrcByPrimaryKey(id=pic_iya4318v93y33losbbxoxy8r8zr6)}"/>
-            <span sec:authentication="principal.nickname"></span>
+            <span id="user-name-span" class="user-name-span" sec:authentication="principal.nickname"></span>
         </span>
     </div>
     <p style="clear: both"></p>
